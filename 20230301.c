@@ -1,89 +1,79 @@
 /*
 #include <stdio.h>
-void test1(int x) { 
-    x = 20;         
-}                     
-void test2(int* p) { 
-    *p = 20;        
-}
 int main(void) {
-    int x = 10;
-    test1(x);       
-    printf("test1 È£Ãâ ÈÄ x = %d\n", x);  
-    test2(&x);     
-    printf("test2 È£Ãâ ÈÄ x = %d\n", x);  
+    int arr[5] = { 1, 2, 3, 4, 5 };
+    int* p = &arr[0];               
+    int i;
+
+    for (i = 0; i < 5; i++, p++) {   
+        printf("p= %p, ", p);        
+        printf("*p = %d\n", *p);   
+    }
+
     return 0;
 }
 */
-// Ãâ·Â °á°ú 
+// ì¶œë ¥ ê²°ê³¼
 /*
-test1 È£Ãâ ÈÄ x = 10
-test2 È£Ãâ ÈÄ x = 20
+p= 00000065EB13F758, *p = 1
+p= 00000065EB13F75C, *p = 2
+p= 00000065EB13F760, *p = 3
+p= 00000065EB13F764, *p = 4
+p= 00000065EB13F768, *p = 5
 
 */
 
+// pëŠ” ì£¼ì†Œê¸° ë•Œë¬¸ì—, p++ì„ í•˜ê²Œ ë˜ë©´, 3000ë²ˆì§€ì—ì„œ 3004ë²ˆì§€ë¡œ, 3008ë²ˆì§€... ì´ë ‡ê²Œ ê°€ê²Œë¨. 3000 -> 3001 -> 3002.. ì´ë ‡ê²Œ ê°€ëŠ”ê±° ì•„ë‹˜!
+// ë§Œì•½ intê°€ ì•„ë‹ˆë¼ shortí˜•ì´ì˜€ë‹¤ë©´ 3000 -> 3002 -> 3004... ë¡œ ì˜¬ë¼ê°.
 
 /*
-#include <stdio.h>
-void test1(int x);
-void test2(int* p);
-int main(void) {
-    int x = 10;
-    test1(x);     
-    printf("test1 È£Ãâ ÈÄ x = %d\n", x); 
-    test2(&x);     
-    printf("test2 È£Ãâ ÈÄ x = %d\n", x);  
-    return 0;
-}
-void test1(int x)
-{
-    x = 20;
-}
-void test2(int* p)
-{
-    *p = 20;
-}
-*/
-// Ãâ·Â °á°ú 
-/*
-test1 È£Ãâ ÈÄ x = 10
-test2 È£Ãâ ÈÄ x = 20
 
-*/
-
-
-
-//const_pointer.c
-/*
 #include <stdio.h>
 int main(void) {
-    int a = 10, b = 20;
-    const int* p1 = &a;        
-    int* const p2 = &a;        
-    const int* const p3 = &a;  
+    int arr[5] = { 1, 2, 3, 4, 5 };
+    int* p = arr;  
+    int i;
 
-    printf("*p1 = %d\n", *p1);  
+    for (i = 0; i < 5; i++)
+        printf("p[%d] = %d\n", i, p[i]);  
 
-    //*p1 = 100;                
-    p1 = &b;                  
-    printf("*p1 = %d\n", *p1); 
-
-    //p2 = &b;                  
-    *p2 = 100;          
-    printf("*p2 = %d\n", *p2);
-
-    //*p3 = 100;                
-    //p3 = &b;                  
-    printf("*p3 = %d\n", *p3);  
     return 0;
 }
 */
-// Ãâ·Â °á°ú 
+// ì¶œë ¥ ê²°ê³¼ 
 /*
-*p1 = 10
-*p1 = 20
-*p2 = 100
-*p3 = 100
+p[0] = 1
+p[1] = 2
+p[2] = 3
+p[3] = 4
+p[4] = 5
 
+*/
+
+
+#include <stdio.h>
+
+void swap(int* px, int* py);
+
+int main(void) {
+    int a = 1, b = 2;
+
+    printf("a = %d, b = %d\n", a, b);
+
+    swap(&a, &b);               
+
+    printf("a = %d, b = %d\n", a, b);
+
+    return 0;
+}
+void swap(int* px, int* py) {    
+    int temp = *px; 
+    *px = *py;      
+    *py = temp;    
+}
+// ì¶œë ¥ ê²°ê³¼
+/*
+a = 1, b = 2
+a = 2, b = 1
 */
 
